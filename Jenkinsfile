@@ -38,4 +38,11 @@ node {
         sh "docker rmi vivekbhardwaj581/${JOB_NAME}:v1.${BUILD_ID}"
     }
 
+    stage("Deploy the Container"){
+     sshagent(['jenkins']) {
+    // some block
+          sh 'ssh -o StrictHostKeyChecking=no ec2-user@18.182.53.246 docker run -p 8080:80 -itd --name ducatcontainer vivekbhardwaj581/website'
+
+}
+}
 }

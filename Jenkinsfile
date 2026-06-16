@@ -38,10 +38,13 @@ node {
         sh "docker rmi vivekbhardwaj581/${JOB_NAME}:v1.${BUILD_ID}"
     }
 
-    stage("Deploy the Container"){
-sshagent(['jenkinskey']) {
-    // some block
-    sh 'ssh -o StrictHostKeyChecking=no ec2-user@18.182.53.246 docker run -p 7979:80 -itd --name ducatcontainer vivekbhardwaj581/website'
-}
-}
+    stage('Deploy Container') {
+    steps {
+        sshagent(['jenkinskey']) {
+            sh '''
+            ssh -o StrictHostKeyChecking=no ec2-user@18.182.53.246 \
+            docker run -p 7979:80 -itd --name ducatcontainer vivekbhardwaj581/website
+            '''
+        }
+    }
 }

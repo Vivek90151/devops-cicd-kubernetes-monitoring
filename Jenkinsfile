@@ -39,10 +39,9 @@ node {
     }
 
     stage("Deploy the Container"){
-     sshagent(['jenkins']) {
+sshagent(['jenkinskey']) {
     // some block
-          sh 'ssh -o StrictHostKeyChecking=no ec2-user@18.182.53.246 docker run -p 8080:80 -itd --name ducatcontainer vivekbhardwaj581/website'
-
+    sh 'ssh -o StrictHostKeyChecking=no ec2-user@18.182.53.246 docker run -p 7979:80 -itd --name ducatcontainer vivekbhardwaj581/my-web'
 }
 }
 }

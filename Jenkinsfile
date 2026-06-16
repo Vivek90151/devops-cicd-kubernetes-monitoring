@@ -1,5 +1,6 @@
-node{
- stage("Build the docker Image") {
-        sh "docker  build -t ${JOB_NAME}:v1.${BUILD_ID} ."
- }
+node {
+    stage('Debug') {
+        sh 'pwd'
+        sh 'ls -la'
+    }
 }

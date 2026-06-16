@@ -17,4 +17,12 @@ node {
         sh "docker tag ${JOB_NAME}:v1.${BUILD_ID} vivekbhardwaj581/${JOB_NAME}:v1.${BUILD_ID}"
         sh "docker tag ${JOB_NAME}:v1.${BUILD_ID} vivekbhardwaj581/${JOB_NAME}:latest"
     } 
+
+    stage("Docker Login") {
+    withCredentials([string(credentialsId: 'dockerhubpassword', variable: 'dockerhubpassword')]) {
+    // some block
+     sh "docker login -u vivekbhardwaj581 -p ${dockerhubpassword}"
+}
+    }
+
 }

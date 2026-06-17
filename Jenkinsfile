@@ -40,9 +40,15 @@ node {
 
    
 stage("Deploy the Container"){
-      sshagent(['jenkinskey']) {
-    // some block
-    sh 'ssh -o StrictHostKeyChecking=no ec2-user@18.182.53.246 docker run -p 8000:80 -itd --name webcontainer vivekbhardwaj581/website'
-}
+    sshagent(['jenkinskey']) {
+
+        sh '''
+        ssh -o StrictHostKeyChecking=no ec2-user@18.182.53.246 "
+        docker stop webcontainer || true
+        docker rm webcontainer || true
+        docker run -p 8000:80 -itd --name webcontainer vivekbhardwaj581/website
+        "
+        '''
+    }
 }
 }

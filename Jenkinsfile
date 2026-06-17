@@ -52,7 +52,7 @@ node {
 
         sh '''
         kubectl apply -f deployment.yml
-        kubectl apply -f service.yml
+        kubectl apply -f service.yaml
 
         kubectl rollout restart deployment website-deployment
         '''

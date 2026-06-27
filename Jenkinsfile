@@ -49,4 +49,14 @@ node {
         sh "docker rmi vivekbhardwaj581/${JOB_NAME}:v1.${BUILD_ID} || true"
     }
 
+    stage("Deploy on Kubernetes") {
+
+        sh '''
+        kubectl apply -f deployment.yml
+        kubectl apply -f service.yaml
+
+        kubectl rollout restart deployment website-deployment
+        '''
+    }
 }
+
